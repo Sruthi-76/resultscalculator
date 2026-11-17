@@ -1,0 +1,127 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Student Grade Calculator</title>
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: lightblue;
+            text-align: center;
+            padding: 30px;
+        }
+
+        .container {
+            background-color: white;
+            width: 350px;
+            margin: auto;
+            padding: 25px;
+            border-radius: 10px;
+        }
+
+        input {
+            width: 90%;
+            padding: 10px;
+            margin: 8px;
+        }
+
+        button {
+            background-color: green;
+            color: white;
+            padding: 12px 25px;
+            border: none;
+            cursor: pointer;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <h2>Student Grade Calculator</h2>
+
+    <input type="text" id="name" placeholder="Enter Student Name">
+
+    <input type="number" id="s1" placeholder="Subject 1 Marks">
+    <input type="number" id="s2" placeholder="Subject 2 Marks">
+    <input type="number" id="s3" placeholder="Subject 3 Marks">
+    <input type="number" id="s4" placeholder="Subject 4 Marks">
+    <input type="number" id="s5" placeholder="Subject 5 Marks">
+
+    <button onclick="calculateGrade()">Calculate</button>
+
+    <div id="result"></div>
+
+</div>
+
+<script>
+
+function calculateGrade() {
+
+    let name = document.getElementById("name").value;
+
+    let m1 = Number(document.getElementById("s1").value);
+    let m2 = Number(document.getElementById("s2").value);
+    let m3 = Number(document.getElementById("s3").value);
+    let m4 = Number(document.getElementById("s4").value);
+    let m5 = Number(document.getElementById("s5").value);
+
+    if (name.trim() === "" ||
+        document.getElementById("s1").value === "" ||
+        document.getElementById("s2").value === "" ||
+        document.getElementById("s3").value === "" ||
+        document.getElementById("s4").value === "" ||
+        document.getElementById("s5").value === "") {
+
+        alert("Please enter all details!");
+        return;
+    }
+
+    let marks = [m1, m2, m3, m4, m5];
+
+    for (let mark of marks) {
+        if (mark < 0 || mark > 100) {
+            alert("Enter marks between 0 and 100!");
+            return;
+        }
+    }
+
+    let total = m1 + m2 + m3 + m4 + m5;
+
+    let average = total / 5;
+
+    let grade;
+
+    if (average >= 90) {
+        grade = "First Grade";
+    }
+    else if (average >= 80) {
+        grade = "Second Grade";
+    }
+    else if (average >= 70) {
+        grade = "Third Grade";
+    }
+    else {
+        grade = "Fail";
+    }
+
+    document.getElementById("result").innerHTML =
+        "<h3>Student Result</h3>" +
+        "Name: " + name + "<br><br>" +
+        "Total Marks: " + total + " / 500<br><br>" +
+        "Average: " + average.toFixed(2) + "%<br><br>" +
+        "Grade: " + grade;
+}
+
+</script>
+
+</body>
+</html>
